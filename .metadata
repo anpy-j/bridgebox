@@ -1,0 +1,6 @@
+# This file tracks properties of this Flutter project.
+# Used by Flutter tool to assess capabilities when running `flutter create .`.
+version:
+  revision: "bridgebox-source"
+  channel: "stable"
+project_type: app
