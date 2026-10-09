@@ -6,6 +6,7 @@ class SecureSecrets {
       : _storage = storage ??
             const FlutterSecureStorage(
               aOptions: AndroidOptions(encryptedSharedPreferences: true),
+              mOptions: MacOsOptions(useDataProtectionKeyChain: false),
             );
 
   final FlutterSecureStorage _storage;
@@ -39,4 +40,14 @@ class SecureSecrets {
     await _storage.delete(key: 'key.$hostId');
     await _storage.delete(key: 'keypass.$hostId');
   }
+
+  Future<void> saveRegistryPassword(String regId, String password) {
+    return _storage.write(key: 'regpwd.$regId', value: password);
+  }
+
+  Future<String?> registryPassword(String regId) =>
+      _storage.read(key: 'regpwd.$regId');
+
+  Future<void> deleteRegistry(String regId) =>
+      _storage.delete(key: 'regpwd.$regId');
 }

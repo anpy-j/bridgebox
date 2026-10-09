@@ -5,6 +5,10 @@ import 'screens/host_list_page.dart';
 import 'services/host_repository.dart';
 import 'services/secure_secrets.dart';
 
+import 'theme/app_theme.dart';
+
+import 'services/registry_repository.dart';
+
 class BridgeboxApp extends StatelessWidget {
   const BridgeboxApp({super.key});
 
@@ -17,24 +21,16 @@ class BridgeboxApp extends StatelessWidget {
         Provider<HostRepository>(
           create: (_) => HostRepository(secrets: secrets),
         ),
+        Provider<RegistryRepository>(
+          create: (_) => RegistryRepository(secrets: secrets),
+        ),
       ],
       child: MaterialApp(
-        title: '桥坞',
+        title: '桥坞 Bridgebox',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF1B4D6E),
-            brightness: Brightness.light,
-          ),
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF7EB6D6),
-            brightness: Brightness.dark,
-          ),
-          useMaterial3: true,
-        ),
+        themeMode: ThemeMode.dark,
+        darkTheme: AppTheme.darkTheme,
+        theme: AppTheme.darkTheme,
         home: const HostListPage(),
       ),
     );
